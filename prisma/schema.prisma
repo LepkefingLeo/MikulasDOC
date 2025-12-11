@@ -5,12 +5,38 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider     = "prisma-client"
+  output       = "../generated/prisma"
   moduleFormat = "cjs"
 }
 
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+model toys {
+  id         Int          @id @default(autoincrement())
+  name       String
+  material   String
+  weight     Float
+  connection connection[]
+}
+
+model children {
+  id           Int          @id @default(autoincrement())
+  name         String
+  address      String
+  country      String
+  wasGoodOrNot Boolean
+  connection   connection[]
+}
+
+model connection {
+  id      Int @id @default(autoincrement())
+  childId Int
+  toyId   Int
+
+  toy   toys     @relation(fields: [toyId], references: [id])
+  child children @relation(fields: [childId], references: [id])
 }
