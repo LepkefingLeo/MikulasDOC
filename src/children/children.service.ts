@@ -6,6 +6,10 @@ import { CreateChildDto } from './dto/create-child.dto';
 import { UpdateChildDto } from './dto/update-child.dto';
 import { PrismaService } from 'src/prisma.service';
 
+/**
+ * A gyerekek adatait kezelő osztály
+ */
+
 @Injectable()
 export class ChildrenService {
   constructor(private readonly db: PrismaService) {}
